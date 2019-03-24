@@ -1,0 +1,6 @@
+FROM openjdk:8-jdk-alpine
+MAINTAINER will.com
+WORKDIR /opt
+#RUN apk --no-cache add netcat-openbsd
+ADD client-0.0.1-SNAPSHOT.jar /client-0.0.1.jar
+ENTRYPOINT ["java","-jar","client-0.0.1.jar"]

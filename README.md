@@ -19,7 +19,29 @@ spring.cloud.config.server.git.uri=https://github.com/wilgares/Spring-Cloud-Conf
     
 ## 5.- abrir un explorador de internet
 
-    http://localhost:8888/xxx/development/master    <--OK
-    http://localhost:8888/xxx/production/master    <-- no existe el perfil production
-      
+    http://localhost:8080/whoami/will
+
+    http://localhost:8080/xxx/development/master    <--OK
+    http://localhost:8080/xxx/production/master    <-- no existe el perfil production
+    
+    
+
+##======================
+## CON DOCKER
+cd server
+mvn clean package
+--(copiar los .jar dentro de la carpeta docker)
+docker-compose build config-server
+docker-compose up -d config-server
+
+
+cd client
+mvn clean package
+--(copiar los .jar dentro de la carpeta docker)
+docker-compose build config-client
+docker-compose up -d config-client
+
+
+
+http://localhost:8080/whoami/will
 

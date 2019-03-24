@@ -1,0 +1,32 @@
+version: '2.1'
+services:
+    config-server:
+        container_name: config-server
+        build:
+            context: .
+            dockerfile: Dockerfile.server
+        image: config-server:latest
+        expose:
+            - 8888
+        ports:
+            - 8888:8888
+        volumes:
+            - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
+    config-client:
+        container_name: config-client
+        build:
+            context: .
+            dockerfile: Dockerfile.client
+        image: config-client:latest
+        #entrypoint: /opt/spring-cloud/bin/config-client-entrypoint.sh
+        environment:
+            SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://192.168.1.50:8888"}}}}'
+        expose:
+            - 8080
+        ports:
+            - 8080:8080
+        depends_on:
+            - config-server
+volumes:
+    spring-cloud-config-repo:
+        external: true
